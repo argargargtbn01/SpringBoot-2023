@@ -1,16 +1,29 @@
 package com.example.demo.mapper;
 
-import com.example.demo.dto.UserDto;
+import com.example.demo.dto.request.UserRequestDto;
+import com.example.demo.dto.response.UserResponseDto;
 import com.example.demo.entity.User;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UserMapper {
-    public static UserDto toUserDto (User user){
-        UserDto tmp = new UserDto();
-        tmp.setId(user.getId());
-        tmp.setName(user.getName());
-        tmp.setEmail(user.getEmail());
-        tmp.setPhone(user.getPhone());
-        tmp.setAvatar(user.getAvatar());
-        return tmp;
+    public  UserResponseDto toUserResponseDto (User user){
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setId(user.getId());
+        userResponseDto.setName(user.getName());
+        userResponseDto.setEmail(user.getEmail());
+        userResponseDto.setPhone(user.getPhone());
+        userResponseDto.setAvatar(user.getAvatar());
+        return userResponseDto;
+    }
+
+    public User toUser (UserRequestDto userRequestDto){
+        User user = new User();
+        user.setId(userRequestDto.getId());
+        user.setName(userRequestDto.getName());
+        user.setEmail(userRequestDto.getEmail());
+        user.setPhone(userRequestDto.getPhone());
+        user.setAvatar(userRequestDto.getAvatar());
+        return user;
     }
 }

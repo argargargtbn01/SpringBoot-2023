@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.UserDto;
+import com.example.demo.dto.request.UserRequestDto;
+import com.example.demo.dto.response.UserResponseDto;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,31 @@ public class UserController {
     @Autowired
     private UserService userService;
     @GetMapping("")
-    public ResponseEntity<?> getListUser(){
-        List<UserDto> users = userService.getListUser();
+    public ResponseEntity<List> getListUser(){
+        List<UserResponseDto> users = userService.getListUser();
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserById(@PathVariable int id){
-        UserDto user = userService.getUserById(id);
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+    public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id){
+        UserResponseDto userDto = userService.getUserById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<?> searchUser(@RequestParam(name="keyword",required = false, defaultValue = "") String keyword){
-        List<UserDto> users = userService.searchUser(keyword);
-        return ResponseEntity.status(HttpStatus.OK).body(users);
+    @PostMapping("")
+    public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto userRequestDto){
+        UserResponseDto userDto = userService.createUser(userRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id,@RequestBody UserRequestDto userRequestDto){
+        UserResponseDto userDto = userService.updateUser(id,userRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id ){
+        userService.deleteUser(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }
