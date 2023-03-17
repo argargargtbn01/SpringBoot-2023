@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<UserResponseDto> deleteUser(@PathVariable Long id ){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id ){
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
