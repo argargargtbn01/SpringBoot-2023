@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.dto.request.TaskRequestDto;
 import com.example.demo.dto.response.TaskResponseDto;
 import com.example.demo.entity.Task;
 import org.springframework.stereotype.Component;
@@ -16,13 +17,13 @@ public class TaskMapper {
         return taskResponseDto;
     }
 
-    public Task toTask(TaskResponseDto taskResponseDto){
+    public Task toTask(TaskRequestDto taskRequestDto){
         Task task = new Task();
-        task.setId(taskResponseDto.getId());
-        task.setTitle(taskResponseDto.getTitle());
-        task.setDescription(taskResponseDto.getDescription());
-        task.setUser(taskResponseDto.getUser());
-        task.setStatus(taskResponseDto.getStatus());
+        task.setId(taskRequestDto.getId());
+        task.setTitle(taskRequestDto.getTitle());
+        task.setDescription(taskRequestDto.getDescription());
+        task.setUser(taskRequestDto.getUser());
+        task.setStatus(taskRequestDto.getStatus());
         return task;
     }
 }

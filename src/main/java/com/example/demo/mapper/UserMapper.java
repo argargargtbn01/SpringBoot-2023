@@ -24,6 +24,7 @@ public class UserMapper {
         user.setEmail(userRequestDto.getEmail());
         user.setPhone(userRequestDto.getPhone());
         user.setAvatar(userRequestDto.getAvatar());
+        user.setPassword(userRequestDto.getPassword());
         return user;
     }
 }

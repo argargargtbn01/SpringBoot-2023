@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userMapper.toUser(userRequestDto);
+            user.setId(id);
             userRepository.save(user);
             UserResponseDto userResponseDto = userMapper.toUserResponseDto(user);
             return userResponseDto;
